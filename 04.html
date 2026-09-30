@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>04. Retro Runner</title>
+    <style>
+        body { background: #1a1a2e; color: #e94560; text-align: center; font-family: sans-serif; }
+        canvas { background: #16213e; border: 3px solid #e94560; margin-top: 20px; }
+        a { color: #fff; display: inline-block; margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <h1>04. RETRO RUNNER</h1>
+    <p>스페이스바를 눌러 점프하세요!</p>
+    <canvas id="game" width="600" height="200"></canvas><br>
+    <a href="index.html">⬅ 메인으로 돌아가기</a>
+    <script>
+        const canvas = document.getElementById("game"), ctx = canvas.getContext("2d");
+        let pY = 150, pVelocity = 0, isJumping = false, obstacleX = 600;
+        document.addEventListener("keydown", e => { if (e.code === "Space" && !isJumping) { pVelocity = -12; isJumping = true; } });
+        function loop() {
+            pY += pVelocity; pVelocity += 0.6;
+            if (pY >= 150) { pY = 150; isJumping = false; }
+            obstacleX -= 6; if (obstacleX < -20) obstacleX = 600;
+            if (obstacleX < 50 && obstacleX > 10 && pY > 120) obstacleX = 600; // 충돌 감지 리셋
+            ctx.clearRect(0,0,600,200);
+            ctx.fillStyle = "#fff"; ctx.fillRect(0, 180, 600, 20); // 바닥
+            ctx.fillStyle = "#00fff0"; ctx.fillRect(30, pY, 20, 30); // 플레이어
+            ctx.fillStyle = "#ff0055"; ctx.fillRect(obstacleX, 150, 20, 30); // 장애물
+            requestAnimationFrame(loop);
+        }
+        loop();
+    </script>
+</body>
+</html>

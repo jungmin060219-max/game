@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>06. Tic Tac Toe</title>
+    <style>
+        body { background: #2d1b4e; color: #f472b6; text-align: center; font-family: sans-serif; }
+        .board { display: grid; grid-template-columns: repeat(3, 80px); gap: 5px; justify-content: center; margin-top: 20px; }
+        .cell { width: 80px; height: 80px; background: #1f1135; border: 2px solid #f472b6; font-size: 36px; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        a { color: #fff; display: inline-block; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>06. TIC TAC TOE</h1>
+    <div class="board" id="board"></div>
+    <a href="index.html">⬅ 메인으로 돌아가기</a>
+    <script>
+        let turn = '❌';
+        const board = document.getElementById("board");
+        for(let i=0; i<9; i++) {
+            const cell = document.createElement("div");
+            cell.className = "cell";
+            cell.onclick = () => {
+                if(!cell.innerText) {
+                    cell.innerText = turn;
+                    turn = turn === '❌' ? '⭕' : '❌';
+                }
+            };
+            board.appendChild(cell);
+        }
+    </script>
+</body>
+</html>
